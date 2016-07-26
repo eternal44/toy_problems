@@ -1,45 +1,33 @@
-// resin coding challenge
-
 function bsearch(ns, n) {
-  var resultInd = -1
+  var startPoint = 0
+  var endPoint = ns.length - 1
   var midPoint
-  var offset = Math.floor((ns.length) / 2)
 
-  function divAndConquer(arr) {
-    midPoint = Math.floor((arr.length) / 2)
+  while((startPoint < (endPoint + 1))) {
+    midPoint = Math.floor((endPoint - startPoint) / 2) + startPoint
 
-    if(midPoint === 0)
-      return -1 // check later.  set to resultInd?
+    if(ns[midPoint] === n){
+      return midPoint
+    } 
 
-    if(arr[midPoint] === n){
-      resultInd = offset - midPoint
-      console.log('found', midPoint)
-      return
+    if(ns[midPoint] > n) {
+      endPoint = midPoint - 1
 
-    } else if(arr[midPoint] > n) {
-      offset -= midPoint - 1
-      console.log('lower', midPoint)
-      divAndConquer(arr.slice(0, midPoint))
-
-    } else if(arr[midPoint] < n) {
-      offset += midPoint + 1
-      console.log('upper', midPoint)
-      divAndConquer(arr.slice(midPoint))
+    } else if(ns[midPoint] < n) {
+      startPoint = midPoint + 1
 
     }
 
   }
-  divAndConquer(ns)
 
-  return resultInd
-
+  return -1
 }
 
-
-// console.log(bsearch([1,2,3,4,5,6,7,8], 4));
+console.log(bsearch([1,2,3,4,5,6,7,8], 4));
 console.log(bsearch([1,2,3,4,5,6,7,8,9], 4));
 console.log(bsearch([1,2,3,4,5,6,7,8,9], 2));
 console.log(bsearch([1,2,3,4,5,6,7,8,9], 1));
-// console.log(bsearch([1,2,3,4,5,6,7,8,9], 7));
-// console.log(bsearch([1,2,3,4,5,6,7,8], 10));
-// console.log(bsearch([], 10));
+console.log(bsearch([1,2,3,4,5,6,7,8,9], 9));
+console.log(bsearch([1,2,3,4,5,6,7,8,9], 7));
+console.log(bsearch([1,2,3,4,5,6,7,8], 10));
+console.log(bsearch([], 10));
