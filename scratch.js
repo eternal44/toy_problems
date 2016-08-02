@@ -1,33 +1,30 @@
-function bsearch(ns, n) {
-  var startPoint = 0
-  var endPoint = ns.length - 1
-  var midPoint
+function permutator(inputArr) {
+  if(typeof inputArr === 'string')
+    inputArr = inputArr.split('')
 
-  while((startPoint < (endPoint + 1))) {
-    midPoint = Math.floor((endPoint - startPoint) / 2) + startPoint
+  var results = [];
 
-    if(ns[midPoint] === n){
-      return midPoint
-    } 
+  function permute(arr, memo) {
+    var cur
+    var memo = memo || []
 
-    if(ns[midPoint] > n) {
-      endPoint = midPoint - 1
+    for (var i = 0; i < arr.length; i++) {
+      cur = arr.splice(i, 1);
 
-    } else if(ns[midPoint] < n) {
-      startPoint = midPoint + 1
+      if (arr.length === 0) {
+        results.push(memo.concat(cur));
+      }
 
+      permute(arr.slice(), memo.concat(cur));
+      arr.splice(i, 0, cur[0]);
     }
 
+    return results;
   }
 
-  return -1
+  return permute(inputArr);
 }
 
-console.log(bsearch([1,2,3,4,5,6,7,8], 4));
-console.log(bsearch([1,2,3,4,5,6,7,8,9], 4));
-console.log(bsearch([1,2,3,4,5,6,7,8,9], 2));
-console.log(bsearch([1,2,3,4,5,6,7,8,9], 1));
-console.log(bsearch([1,2,3,4,5,6,7,8,9], 9));
-console.log(bsearch([1,2,3,4,5,6,7,8,9], 7));
-console.log(bsearch([1,2,3,4,5,6,7,8], 10));
-console.log(bsearch([], 10));
+
+// permutator('cate')
+console.log(permutator('cat'))
