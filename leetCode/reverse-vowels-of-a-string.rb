@@ -3,7 +3,7 @@ def reverse_vowels(s)
 
   vowelArr = s.split('').inject([]) do |memo, letter|
 
-    if letter.match(/[aeiou]/)
+    if letter.match(/[aeiouAEIOU]/)
       memo.push(count)
     end
     count += 1
@@ -26,9 +26,10 @@ end
 
 
 s = "hello"
-
 s1 = "leetcode"
 
-puts reverse_vowels(s) # holle
-puts reverse_vowels(s1) # leotcede
+# puts reverse_vowels(s) # holle
+# puts reverse_vowels(s1) # leotcede
+# puts reverse_vowels('aeiou') # leotcede
+puts reverse_vowels('hEllo') # leotcede
 
